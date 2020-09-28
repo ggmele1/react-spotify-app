@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/spotify-stats-react/static/css/main.3518908d.chunk.css",
+    "main.js": "/spotify-stats-react/static/js/main.a166f9e4.chunk.js",
+    "main.js.map": "/spotify-stats-react/static/js/main.a166f9e4.chunk.js.map",
+    "runtime-main.js": "/spotify-stats-react/static/js/runtime-main.9ee68e7d.js",
+    "runtime-main.js.map": "/spotify-stats-react/static/js/runtime-main.9ee68e7d.js.map",
+    "static/js/2.e2fcce38.chunk.js": "/spotify-stats-react/static/js/2.e2fcce38.chunk.js",
+    "static/js/2.e2fcce38.chunk.js.map": "/spotify-stats-react/static/js/2.e2fcce38.chunk.js.map",
+    "index.html": "/spotify-stats-react/index.html",
+    "precache-manifest.d920dc475eff89604d1f8a7feb2f8573.js": "/spotify-stats-react/precache-manifest.d920dc475eff89604d1f8a7feb2f8573.js",
+    "service-worker.js": "/spotify-stats-react/service-worker.js",
+    "static/css/main.3518908d.chunk.css.map": "/spotify-stats-react/static/css/main.3518908d.chunk.css.map",
+    "static/js/2.e2fcce38.chunk.js.LICENSE.txt": "/spotify-stats-react/static/js/2.e2fcce38.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9ee68e7d.js",
+    "static/js/2.e2fcce38.chunk.js",
+    "static/css/main.3518908d.chunk.css",
+    "static/js/main.a166f9e4.chunk.js"
+  ]
+}
