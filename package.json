@@ -1,7 +1,7 @@
 {
   "name": "spotify-favorites",
   "version": "0.1.0",
-  "homepage": "https://taniarascia.github.io/spotify-react-app",
+  "homepage": "https://taniarascia.github.io/react-spotify-app",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
