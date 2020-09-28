@@ -1,16 +1,14 @@
-import React from 'react';
-import axios from 'axios';
-import User from './User';
-import Menu from './Menu';
-import UserTracks from './UserTracks';
-import Home from './Home';
+import React from "react";
+import axios from "axios";
+import User from "./User";
+import Menu from "./Menu";
+import UserTracks from "./UserTracks";
+import Home from "./Home";
 import { authEndpoint, clientId, redirectUri, scopes } from "./config";
-import hash from './hash';
-import './App.css';
+import hash from "./hash";
+import "./App.css";
 
-import { Typography, CssBaseline, Button, Container } from '@material-ui/core';
-
-
+import { Typography, CssBaseline, Button, Container } from "@material-ui/core";
 
 class App extends React.Component {
   constructor() {
@@ -19,103 +17,120 @@ class App extends React.Component {
       token: null,
       request: "",
       range: "medium",
-      items: [{
-        artists: [{ name: ""}],
-        name: "",
-        album: {
-          images: [{url: ""}]
+      items: [
+        {
+          artists: [{ name: "" }],
+          name: "",
+          album: {
+            images: [{ url: "" }],
+          },
+          images: [{ url: "" }],
+          external_urls: { spotify: "" },
         },
-        images: [{url: ""}],
-        external_urls: {spotify: ""},
-      }],
+      ],
       no_data: true,
     };
-    this.getUserTopArtist = this.getUserTopArtist.bind(this)
+    this.getUserTopArtist = this.getUserTopArtist.bind(this);
   }
 
   handleClick = (event) => {
     const { token } = this.state;
     // this.setState({range})
-    this.getUserTopArtist(token, event)
-  }
+    this.getUserTopArtist(token, event);
+  };
 
   logOut = () => {
-    this.setState({token: null})
-  }
-  
+    this.setState({ token: null });
+  };
+
   componentDidMount() {
     // Sets token
     let _token = hash.access_token;
     if (_token) {
       this.setState({
-        token: _token
+        token: _token,
       });
-      console.log("componentDidMount RAN")
+      console.log("componentDidMount RAN");
     }
   }
 
   getUserTopArtist = async (token, request) => {
-    console.log("axios.get RAN")
-    await axios.get(`https://api.spotify.com/v1/me/top/${request}`, {
-      params: {limit: 50, time_range: "long_term"},
-      headers: {
-        Authorization: "Bearer " + token,
-      }
-    })
-    .then(res => {
-      const userData = res.data;
-      console.log("getUserTopArtist .THEN")
-      this.setState({
-        items: userData.items,
-        no_data: false,
-        request: request,
+    console.log("axios.get RAN");
+    await axios
+      .get(`https://api.spotify.com/v1/me/top/${request}`, {
+        params: { limit: 50, time_range: "long_term" },
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        const userData = res.data;
+        console.log("getUserTopArtist .THEN");
+        this.setState({
+          items: userData.items,
+          no_data: false,
+          request: request,
+        });
+        console.log(userData.items);
       });
-      console.log(userData.items)
-    });
-  }  
+  };
 
   render() {
     return (
       <React.Fragment>
         <CssBaseline />
-          <Container className="main">
-            {this.state.token && (
-              <div className="menu">
-                <Menu logOut={this.logOut} handleClick={this.handleClick}/>
-              </div>
-            )}
-            <div className="App">
-              <header className="App-header">
-                {!this.state.token && (
+        <Container className="main">
+          {this.state.token && (
+            <div className="menu">
+              <Menu logOut={this.logOut} handleClick={this.handleClick} />
+            </div>
+          )}
+          <div className="App">
+            <header className="App-header">
+              {!this.state.token && (
                 <div className="login">
                   <div>
-                    <Typography variant="h4" align="left" className="heading">Login with your Spotify!</Typography>
+                    <Typography variant="h4" align="left" className="heading">
+                      Login with your Spotify!
+                    </Typography>
                   </div>
-                  <div className="login-button">              
-                    <Button variant="contained" className="login-button" color="primary" href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}>
-                        <Typography>Login</Typography>
+                  <div className="login-button">
+                    <Button
+                      variant="contained"
+                      className="login-button"
+                      color="primary"
+                      href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                        "%20"
+                      )}&response_type=token&show_dialog=true`}
+                    >
+                      <Typography>Login</Typography>
                     </Button>
                   </div>
                 </div>
+              )}
+              {this.state.token && this.state.no_data && (
+                <Home handleClick={this.handleClick} />
+              )}
+              {this.state.token &&
+                !this.state.no_data &&
+                this.state.request === "artists" && (
+                  <User
+                    handleClick={this.handleClick}
+                    items={this.state.items}
+                    className="user"
+                  />
                 )}
-                {this.state.token && this.state.no_data && (
-                  <Home handleClick={this.handleClick} />
+              {this.state.token &&
+                !this.state.no_data &&
+                this.state.request === "tracks" && (
+                  <UserTracks items={this.state.items} className="user" />
                 )}
-                {this.state.token && !this.state.no_data && this.state.request === "artists" && (
-                  <User handleClick={this.handleClick} items={this.state.items} className="user"/>
-                )}
-                {this.state.token && !this.state.no_data && this.state.request === "tracks" && (
-                  <UserTracks items={this.state.items} className="user"/>
-                )}
-              </header>
-            </div>
+            </header>
+          </div>
         </Container>
       </React.Fragment>
     );
-  }  
+  }
 }
 
 export default App;
-
-
-

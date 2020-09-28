@@ -1,8 +1,8 @@
-import React from 'react';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import React from "react";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import IconButton from "@material-ui/core/IconButton";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 export default function SimpleMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -17,11 +17,13 @@ export default function SimpleMenu(props) {
 
   return (
     <div>
-      <IconButton 
+      <IconButton
         aria-controls="simple-menu"
-        aria-haspopup="true" variant="contained"
-        onClick={handleClick}>
-        <MoreVertIcon color="primary" style={{ fontSize: 50 } }/>
+        aria-haspopup="true"
+        variant="contained"
+        onClick={handleClick}
+      >
+        <MoreVertIcon color="primary" style={{ fontSize: 50 }} />
       </IconButton>
       <Menu
         id="simple-menu"
@@ -30,8 +32,12 @@ export default function SimpleMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => props.handleClick("artists")}>View Artists</MenuItem>
-        <MenuItem onClick={() => props.handleClick("tracks")}>My Tracks</MenuItem>
+        <MenuItem onClick={() => props.handleClick("artists")}>
+          View Artists
+        </MenuItem>
+        <MenuItem onClick={() => props.handleClick("tracks")}>
+          My Tracks
+        </MenuItem>
         <MenuItem onClick={() => props.logOut()}>Logout</MenuItem>
       </Menu>
     </div>
